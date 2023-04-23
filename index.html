@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Stack Implementation</title>
+</head>
+<body>
+	<h1>Stack Implementation</h1>
+	<p>Enter a value and click "Push" to add it to the stack.</p>
+	<input type="text" id="pushValue">
+	<button onclick="push()">Push</button>
+	<br>
+	<p>Click "Pop" to remove the top value from the stack.</p>
+	<button onclick="pop()">Pop</button>
+	<br>
+	<p>Enter a value and an index and click "Insert" to insert the value at the specified index.</p>
+	<input type="text" id="insertValue">
+	<input type="text" id="insertIndex">
+	<button onclick="insert()">Insert</button>
+	<br>
+	<p>The current stack:</p>
+	<div id="stack"></div>
+	
+	<script>
+		// Define the stack data structure using an array
+		var stack = [];
+
+		// Function to add a value to the top of the stack
+		function push() {
+			var value = document.getElementById("pushValue").value;
+			stack.push(value);
+			updateStack();
+		}
+
+		// Function to remove the top value from the stack
+		function pop() {
+			stack.pop();
+			updateStack();
+		}
+
+		// Function to insert a value at a specified index in the stack
+		function insert() {
+			var value = document.getElementById("insertValue").value;
+			var index = parseInt(document.getElementById("insertIndex").value);
+			stack.splice(index, 0, value);
+			updateStack();
+		}
+
+		// Function to update the HTML display of the stack
+		function updateStack() {
+			var stackDiv = document.getElementById("stack");
+			stackDiv.innerHTML = "";
+			for (var i = stack.length - 1; i >= 0; i--) {
+				var nodeDiv = document.createElement("div");
+				nodeDiv.innerHTML = stack[i];
+				nodeDiv.className = "stack-node";
+				stackDiv.appendChild(nodeDiv);
+			}
+		}
+	</script>
+</body>
+</html>
