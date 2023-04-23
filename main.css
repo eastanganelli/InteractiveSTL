@@ -1,3 +1,7 @@
 body {
-    padding: 5px;
+    background-color: chocolate;
+}
+
+div {
+    padding: 10px;
 }
