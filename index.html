@@ -1,61 +1,33 @@
-<!DOCTYPE html>
-<html>
-<head>
-	<title>Stack Implementation</title>
-</head>
-<body>
-	<h1>Stack Implementation</h1>
-	<p>Enter a value and click "Push" to add it to the stack.</p>
-	<input type="text" id="pushValue">
-	<button onclick="push()">Push</button>
-	<br>
-	<p>Click "Pop" to remove the top value from the stack.</p>
-	<button onclick="pop()">Pop</button>
-	<br>
-	<p>Enter a value and an index and click "Insert" to insert the value at the specified index.</p>
-	<input type="text" id="insertValue">
-	<input type="text" id="insertIndex">
-	<button onclick="insert()">Insert</button>
-	<br>
-	<p>The current stack:</p>
-	<div id="stack"></div>
-	
-	<script>
-		// Define the stack data structure using an array
-		var stack = [];
-
-		// Function to add a value to the top of the stack
-		function push() {
-			var value = document.getElementById("pushValue").value;
-			stack.push(value);
-			updateStack();
-		}
-
-		// Function to remove the top value from the stack
-		function pop() {
-			stack.pop();
-			updateStack();
-		}
-
-		// Function to insert a value at a specified index in the stack
-		function insert() {
-			var value = document.getElementById("insertValue").value;
-			var index = parseInt(document.getElementById("insertIndex").value);
-			stack.splice(index, 0, value);
-			updateStack();
-		}
-
-		// Function to update the HTML display of the stack
-		function updateStack() {
-			var stackDiv = document.getElementById("stack");
-			stackDiv.innerHTML = "";
-			for (var i = stack.length - 1; i >= 0; i--) {
-				var nodeDiv = document.createElement("div");
-				nodeDiv.innerHTML = stack[i];
-				nodeDiv.className = "stack-node";
-				stackDiv.appendChild(nodeDiv);
-			}
-		}
-	</script>
-</body>
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>LPI - STL Interactivo</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-rbsA2VBKQhggwzxH7pPCaAqO46MgnOM80zW1RWuH61DGLwZJEdK2Kadq2F9CUG65" crossorigin="anonymous">
+    <link rel="stylesheet" href="styles.css">
+  </head>
+  <body>
+    <div id = "title">
+		<h1>Laboratorio de Programacion I</h1><br><h3>STL interactivo</h3>
+	</div>
+	<div class="d-flex align-items-start" id = "STL_GUI">
+		<div class="nav flex-column nav-pills me-3" id="v-pills-tab" role="tablist" aria-orientation="vertical">
+		  <button class="nav-link active" id="v-pills-vector-tab" data-bs-toggle="pill" data-bs-target="#v-pills-home" type="button" role="tab" aria-controls="v-pills-vector" aria-selected="true">Vector</button>
+		  <button class="nav-link" id="v-pills-flist-tab" data-bs-toggle="pill" data-bs-target="#v-pills-profile" type="button" role="tab" aria-controls="v-pills-flist" aria-selected="false">Lista Simple Enlace</button>
+		  <button class="nav-link" id="v-pills-list-tab" data-bs-toggle="pill" data-bs-target="#v-pills-disabled" type="button" role="tab" aria-controls="v-pills-list" aria-selected="false" disabled>Lista Doble Enlace</button>
+		  <button class="nav-link" id="v-pills-stack-tab" data-bs-toggle="pill" data-bs-target="#v-pills-messages" type="button" role="tab" aria-controls="v-pills-stack" aria-selected="false">Pila</button>
+		  <button class="nav-link" id="v-pills-queue-tab" data-bs-toggle="pill" data-bs-target="#v-pills-settings" type="button" role="tab" aria-controls="v-pills-queue" aria-selected="false">Cola</button>
+		</div>
+		<div class="tab-content" id="v-pills-tabContent">
+		  <div class="tab-pane fade show active" id="v-pills-vector" role="tabpanel" aria-labelledby="v-pills-vector-tab" tabindex="0">...</div>
+		  <div class="tab-pane fade" id="v-pills-flist" role="tabpanel" aria-labelledby="v-pills-flist-tab" tabindex="0">...</div>
+		  <div class="tab-pane fade" id="v-pills-list" role="tabpanel" aria-labelledby="v-pills-list-tab" tabindex="0">...</div>
+		  <div class="tab-pane fade" id="v-pills-stack" role="tabpanel" aria-labelledby="v-pills-stack-tab" tabindex="0">...</div>
+		  <div class="tab-pane fade" id="v-pills-queue" role="tabpanel" aria-labelledby="v-pills-queue-tab" tabindex="0">...</div>
+		</div>
+	  </div>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-kenU1KFdBIe4zVF0s0G1M5b4hcpxyD9F7jL+jjXkk+Q2h455rYXK/7HAuoJl+0I4" crossorigin="anonymous"></script>
+    <script src="main.js"></script>
+  </body>
 </html>
