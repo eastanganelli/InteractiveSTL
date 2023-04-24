@@ -8,7 +8,31 @@
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-rbsA2VBKQhggwzxH7pPCaAqO46MgnOM80zW1RWuH61DGLwZJEdK2Kadq2F9CUG65" crossorigin="anonymous">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css" />
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.4/jquery.min.js"></script>
-    <link rel="stylesheet" href="../main.css">
+    <style>
+        body {
+            background-color: whitesmoke;
+        }
+
+        div {
+            padding: 10px;
+        }
+
+        #gui {
+            padding: 20px;
+        }
+        
+        .queue-node {
+            background-color: #f2f2f2;
+            padding: 5px;
+            border: 1px solid black;
+            margin-bottom: 5px;
+        }
+
+        .queue-node-address {
+            color: #666;
+            font-size: 0.8em;
+        }
+    </style>
 </head>
 
 <body>
@@ -37,14 +61,49 @@
         </div>
     </div>
     <script type="text/javascript">
-        $('#btnEnqueue').on('click', function () {
-            enqueue();
-        });
-        $('#btnDequeue').on('click', function () {
-            dequeue();
-        });
+    let queue = [];
+
+    const random_address = () => {
+        return "0x" + Math.floor(Math.random() * 100).toString(16).padStart(4, "0");
+    }
+    
+    const head_tail_queue = () => {
+        let head_ = $("#queueHead");
+        (queue.length < 1) ? head_.text("nullptr"): head_.text(queue[0].address);
+        let tail_ = $("#queueTail");
+        (queue.length < 1) ? tail_.text("nullptr"): tail_.text(queue[queue.length - 1].address);
+    }
+    const updateQueue = () => {
+        let queueDiv = $("#queue");
+        queueDiv.empty();
+        for (let i = 0; i < queue.length; i++) {
+            let nodeDiv = $("<div>").addClass("queue-node").text(queue[i].value);
+            let addressDiv = $("<div>").addClass("queue-node-address").append(`<span class="badge text-bg-primary">Address: ` + queue[i].address + `</span>`);
+            if (i < queue.length - 1) {
+                let nextAddressDiv = $("<div>").addClass("queue-node-address").append(`<span class="badge text-bg-info">Next: ` + queue[i + 1].address + `</span>`);
+                nodeDiv.append(nextAddressDiv);
+            }
+            nodeDiv.append(addressDiv);
+            queueDiv.append(nodeDiv);
+        }
+        head_tail_queue();
+    }
+
+    $('#btnEnqueue').on('click', function() {
+        let value = $("#enqueueValue").val();
+        if (value != '') {
+            let address = random_address();
+            queue.push({ value: value, address: address });
+            updateQueue();
+            $("#enqueueValue").val('');
+        }
+    });
+
+    $('#btnDequeue').on('click', function() {
+        queue.shift();
+        updateQueue();
+    });
     </script>
-    <script src="main.js"></script>
 </body>
 
 </html>
