@@ -21,3 +21,15 @@ div {
     color: #666;
     font-size: 0.8em;
 }
+
+.queue-node {
+    background-color: #f2f2f2;
+    padding: 5px;
+    border: 1px solid black;
+    margin-bottom: 5px;
+}
+
+.queue-node-address {
+    color: #666;
+    font-size: 0.8em;
+}
