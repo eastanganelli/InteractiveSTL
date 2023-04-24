@@ -6,6 +6,11 @@ const random_address = () => {
     return  address;
  }
 
+
+// LIST
+
+// FORWARD LIST
+
 // STACK
 let stack = [];
 
