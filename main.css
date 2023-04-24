@@ -1,7 +1,23 @@
 body {
-    background-color: chocolate;
+    background-color: whitesmoke;
 }
 
 div {
     padding: 10px;
+}
+
+#gui {
+    padding: 20px;
+}
+
+.stack-node {
+    background-color: #f2f2f2;
+    padding: 5px;
+    border: 1px solid black;
+    margin-bottom: 5px;
+}
+
+.stack-node-address {
+    color: #666;
+    font-size: 0.8em;
 }
