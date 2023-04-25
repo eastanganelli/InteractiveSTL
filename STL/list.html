@@ -93,7 +93,7 @@
             let nextAddress = index < stl_list.length ? stl_list[index]?.address : "nullptr",
                 prevAddress = index < stl_list.length ? stl_list[index - 1]?.address : "nullptr";
 
-            if (index > 0) {
+            if (index > 0 && index < stl_list.length) {
                 stl_list[index - 1].prevAddress = address;
                 stl_list[index + 1].nextAddress = address;
             }

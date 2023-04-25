@@ -47,7 +47,7 @@
         let head_ = $("#vectorHead");
         (stl_vector.length < 1) ? head_.text("nullptr"): head_.text(follow_address(0));
         let tail_ = $("#vectorTail");
-        (stl_vector.length < 1) ? tail_.text("nullptr"): tail_.text(follow_address(stl_vector.length));
+        (stl_vector.length < 1) ? tail_.text("nullptr"): tail_.text(follow_address(stl_vector.length - 1));
     }
     const updateVector = () => {
         let vectorDiv = $("#vector");

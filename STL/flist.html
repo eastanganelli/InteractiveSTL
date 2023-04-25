@@ -91,7 +91,7 @@
             let nextAddress = index < stl_flist.length ? stl_flist[index].address : "nullptr";
 
             if (index > 0)
-                stl_flist[index-1].nextAddress = address;
+                stl_flist[index - 1].nextAddress = address;
 
             stl_flist.splice(index, 0, {value: value, address: address, nextAddress: nextAddress});
             $("#flistInsertValue").val('');

@@ -9,8 +9,9 @@ div {
 #gui {
     padding: 20px;
 }
-tab-pane {
-    width: 100%;
+
+.content {
+    max-width: 1230px;
 }
 
 .list-node, .queue-node, .stack-node, .vector-node {
