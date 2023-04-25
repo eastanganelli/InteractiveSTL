@@ -76,7 +76,7 @@
     });
 
     $('#btnClearQueue').on('click', () => {
-        stl_queue.splice(0, stl_queue.length);
+        stl_queue = [];
         updateQueue();
     });
 
