@@ -2,11 +2,11 @@ body {
     background-color: whitesmoke;
 }
 
-div > #title {
+div {
     padding: 10px;
 }
 
-div > #gui {
+#gui {
     padding: 20px;
 }
 
@@ -20,6 +20,7 @@ div > #gui {
     background-color: #f2f2f2;
     padding: 5px;
     border: 1px solid black;
+    border-radius: 12.5%;
     margin-bottom: 5px;
     font-size: 2em;
 }
@@ -35,5 +36,6 @@ div > #gui {
     background-color: lightcoral;
     padding: 5px;
     border: 1px solid black;
+    border-radius: 12.5%;
     margin-bottom: 5px;
 }
