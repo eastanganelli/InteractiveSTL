@@ -34,7 +34,7 @@
                     </div>
                     <div class="input-group">
                         <span class="input-group-text">Remover todos los elementos</span>
-                        <button class="btn btn-outline-primary" id="btnVectorErase" type="button">Remove</button>
+                        <button class="btn btn-outline-primary" id="btnVectorClear" type="button">Clear</button>
                     </div>
                 </div>
                 <div class="col">
@@ -94,8 +94,8 @@
         }
     });
 
-    $('#btnVectorRemove').on('click', () => {
-        stl_vector.slice(0, stl_vector.length - 1);
+    $('#btnVectorClear').on('click', () => {
+        stl_vector.slice(0);
         updateVector();
     });
 

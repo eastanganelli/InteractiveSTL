@@ -109,13 +109,8 @@
         }
     });
 
-    $('#btnClearStack').on('click', () => {
-        stl_stack.slice(0, stl_stack.length - 1);
-        updateStack();
-    });
-
     $('#btnClearList').on('click', () => {
-        stl_list.splice(0, stl_list.length - 1);
+        stl_list.splice(0);
         updateList();
     });
 
