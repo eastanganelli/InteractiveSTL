@@ -10,9 +10,6 @@ div {
     padding: 20px;
 }
 
-.tab-content {
-    max-width: 1230px;
-}
 
 .list-node, .queue-node, .stack-node, .vector-node {
     font-size: 2em;
