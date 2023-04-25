@@ -31,7 +31,7 @@
                     </div>
                 </div>
                 <div class="col">
-                    <h3>Cola <span class="badge bg-secondary">Address Head: <span id="queueHead">nullptr</span></span> <span class="badge bg-secondary">Address Tail: <span id="queueTail">nullptr</span></span></h3>
+                    <h4>Cola <span class="badge bg-secondary">Address Head: <span id="queueHead">nullptr</span></span> <span class="badge bg-secondary">Address Tail: <span id="queueTail">nullptr</span></span></h4>
                     <div id="queue"></div>
                 </div>
             </div>
@@ -50,7 +50,7 @@
         let queueDiv = $("#queue");
         queueDiv.empty();
         for (let i = 0; i < stl_queue.length; i++) {
-            let nodeDiv = $("<div>").addClass("queue-node").text(stl_queue[i].value);
+            let nodeDiv = $("<div>").addClass("queue-node container-fluid").text(stl_queue[i].value);
             let addressDiv = $("<div>").addClass("queue-node-address").append(`<h6><span class="badge text-bg-primary">Address: ` + stl_queue[i].address + `</span></h6>`);
             nodeDiv.append(addressDiv);
             

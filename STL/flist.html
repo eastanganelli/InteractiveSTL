@@ -38,7 +38,7 @@
                     </div>
                 </div>
                 <div class="col">
-                    <h3>Lista <span class="badge bg-secondary">Address Head: <span id="flistHead">nullptr</span></span> <span class="badge bg-secondary">Address Tail: <span id="flistTail">nullptr</span></span></h3>
+                    <h4>Lista <span class="badge bg-secondary">Address Head: <span id="flistHead">nullptr</span></span> <span class="badge bg-secondary">Address Tail: <span id="flistTail">nullptr</span></span></h4>
                     <div id="flist"></div>
                 </div>
             </div>
@@ -57,7 +57,7 @@
         let listDiv = $("#flist");
         listDiv.empty();
         for (let i = 0; i < stl_flist.length; i++) {
-            let nodeDiv = $("<div>").addClass("flist-node").attr('onclick', 'chooseNodeFL(this)').text(stl_flist[i].value);
+            let nodeDiv = $("<div>").addClass("flist-node container-fluid").attr('onclick', 'chooseNodeFL(this)').text(stl_flist[i].value);
             let addressDiv = $("<div>").addClass("flist-node-address").append(`<h6><span class="badge text-bg-primary">Address: ` + stl_flist[i].address + `</span></h6>`);
             nodeDiv.append(addressDiv);
             if (i < stl_flist.length) {
