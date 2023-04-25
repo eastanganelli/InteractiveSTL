@@ -134,7 +134,11 @@
     });
 
     const chooseNode = (node_) => {
-        $(node_).addClass('selected');
+        let thisNode = $(node_);
+        if (thisNode.hasClass('selected'))
+            $(node_).removeClass('selected');
+        else 
+            $(node_).addClass('selected');
     }
     </script>
 </body>
