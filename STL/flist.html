@@ -40,24 +40,24 @@
                 <div class="col">
                     <div class="input-group">
                         <span class="input-group-text">Ingrese un valor</span>
-                        <input type="text" class="form-control" id="listValueAdd" aria-describedby="inputGroup-sizing-sm">
-                        <button class="btn btn-outline-primary" id="btnListAdd" type="button">Añadir</button>
+                        <input type="text" class="form-control" id="flistValueAdd" aria-describedby="inputGroup-sizing-sm">
+                        <button class="btn btn-outline-primary" id="btnfListAdd" type="button">Añadir</button>
                     </div>
                     <div class="input-group">
                         <span class="input-group-text">Ingrese valor</span>
-                        <input type="text" class="form-control" id="listInsertValue" aria-describedby="inputGroup-sizing-sm">
+                        <input type="text" class="form-control" id="flistInsertValue" aria-describedby="inputGroup-sizing-sm">
                         <span class="input-group-text">Ingrese posición</span>
-                        <input type="text" class="form-control" id="listInsertPosition" aria-describedby="inputGroup-sizing-sm">
-                        <button class="btn btn-outline-primary" id="btnListInsert" type="button">Insertar</button>
+                        <input type="text" class="form-control" id="flistInsertPosition" aria-describedby="inputGroup-sizing-sm">
+                        <button class="btn btn-outline-primary" id="btnfListInsert" type="button">Insertar</button>
                     </div>
                     <div class="input-group">
                         <span class="input-group-text">Haga click en "Remove" para remover elemento seleccionado</span>
-                        <button class="btn btn-outline-primary" id="btnListRemove" type="button">Remove</button>
+                        <button class="btn btn-outline-primary" id="btnfListRemove" type="button">Remove</button>
                     </div>
                 </div>
                 <div class="col">
-                    <h3>Lista <span class="badge bg-secondary">Address Head: <span id="listHead">nullptr</span></span> <span class="badge bg-secondary">Address Tail: <span id="listTail">nullptr</span></span></h3>
-                    <div id="list"></div>
+                    <h3>Lista <span class="badge bg-secondary">Address Head: <span id="flistHead">nullptr</span></span> <span class="badge bg-secondary">Address Tail: <span id="flistTail">nullptr</span></span></h3>
+                    <div id="flist"></div>
                 </div>
             </div>
         </div>
@@ -65,22 +65,22 @@
     <script type="text/javascript">
     let stl_flist = [];
     
-    const head_tail_list = () => {
-        let head_ = $("#listHead");
+    const head_tail_flist = () => {
+        let head_ = $("#flistHead");
         (stl_flist.length < 1) ? head_.text("nullptr"): head_.text(stl_flist[0].address);
-        let tail_ = $("#listTail");
+        let tail_ = $("#flistTail");
         (stl_flist.length < 1) ? tail_.text("nullptr"): tail_.text(stl_flist[stl_flist.length - 1].address);
     }
     const updateList = () => {
-        let listDiv = $("#list");
+        let listDiv = $("#flist");
         listDiv.empty();
         for (let i = 0; i < stl_flist.length; i++) {
-            let nodeDiv = $("<div>").addClass("list-node").attr('onclick', 'chooseNode(this)').text(stl_flist[i].value);
-            let addressDiv = $("<div>").addClass("list-node-address").append(`<h6><span class="badge text-bg-primary">Address: ` + stl_flist[i].address + `</span></h6>`);
+            let nodeDiv = $("<div>").addClass("flist-node").attr('onclick', 'chooseNode(this)').text(stl_flist[i].value);
+            let addressDiv = $("<div>").addClass("flist-node-address").append(`<h6><span class="badge text-bg-primary">Address: ` + stl_flist[i].address + `</span></h6>`);
             nodeDiv.append(addressDiv);
             if (i < stl_flist.length) {
                 let next_ = (stl_flist[i + 1]?.address == undefined) ? "nullptr" : stl_flist[i + 1].address;
-                let nextAddressDiv = $("<div>").addClass("list-node-address").append(`<h6><span class="badge text-bg-info">Next: ` + next_ + `</span></h6>`);
+                let nextAddressDiv = $("<div>").addClass("flist-node-address").append(`<h6><span class="badge text-bg-info">Next: ` + next_ + `</span></h6>`);
 
                 nodeDiv.append(nextAddressDiv);
             }
@@ -89,8 +89,8 @@
         head_tail_list();
     }
 
-    $('#btnListAdd').on('click', () => {
-        let value = $("#listValueAdd").val();
+    $('#btnfListAdd').on('click', () => {
+        let value = $("#flistValueAdd").val();
         if(value != '') {
             let address = random_address();
             let nextAddress = "nullptr";
@@ -100,14 +100,14 @@
             }
 
             stl_flist.push({value: value, address: address, nextAddress: nextAddress});
-            $("#listValueAdd").val('');
+            $("#flistValueAdd").val('');
             updateList();
         }
     });
 
-    $('#btnListInsert').on('click', () => {
-        let value = $("#listInsertValue").val();
-        let index = parseInt($("#listInsertPosition").val());
+    $('#btnfListInsert').on('click', () => {
+        let value = $("#flistInsertValue").val();
+        let index = parseInt($("#flistInsertPosition").val());
         if(value != '') {
             let address = random_address();
             let nextAddress = index < stl_flist.length ? stl_flist[index].address : "nullptr";
@@ -116,14 +116,14 @@
                 stl_flist[index-1].nextAddress = address;
 
             stl_flist.splice(index, 0, {value: value, address: address, nextAddress: nextAddress});
-            $("#listInsertValue").val('');
-            $("#listInsertPosition").val('');
+            $("#flistInsertValue").val('');
+            $("#flistInsertPosition").val('');
             updateList();
         }
     });
 
-    $('#btnListRemove').on('click', () => {
-        let index = $('.list-node.selected').index();
+    $('#btnfListRemove').on('click', () => {
+        let index = $('.flist-node.selected').index();
         if (index >= 0 && index < stl_flist.length) {
             if (index > 0) {
                 stl_flist[index - 1].nextAddress = stl_flist[index].nextAddress;
