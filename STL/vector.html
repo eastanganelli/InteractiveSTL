@@ -57,7 +57,7 @@
         let vectorDiv = $("#vector");
         vectorDiv.empty();
         for (let i = 0; i < stl_vector.length; i++) {
-            let nodeDiv = $("<div>").addClass("vector-node container-fluid").attr('onclick', 'chooseNodeVector(this)').text(stl_vector[i].value);
+            let nodeDiv = $("<div>").addClass("vector-node").attr('onclick', 'chooseNodeVector(this)').text(stl_vector[i].value);
             let addressDiv = $("<div>").addClass("vector-node-address").append(`<h6><span class="badge text-bg-primary">Address: ` + follow_address(i) + `</span></h6>`);
             nodeDiv.append(addressDiv);
             vectorDiv.append(nodeDiv);

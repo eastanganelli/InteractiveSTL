@@ -2,87 +2,38 @@ body {
     background-color: whitesmoke;
 }
 
-div {
+div > #title {
     padding: 10px;
 }
 
-#gui {
+div > #gui {
     padding: 20px;
 }
 
+/* STL */
+#vector, #flist, #list, #stack, #queue {
+    border-color: 2px solid black;
+}
 
-.list-node, .queue-node, .stack-node, .vector-node {
+/* Nodes */
+.vector-node, .flist-node, .list-node, .stack-node, .queue-node {
+    background-color: #f2f2f2;
+    padding: 5px;
+    border: 1px solid black;
+    margin-bottom: 5px;
     font-size: 2em;
 }
 
-/* Vector */
-    .vector-node {
-        background-color: #f2f2f2;
-        padding: 5px;
-        border: 1px solid black;
-        margin-bottom: 5px;
-    }
-
-    .vector-node-address {
-        color: #666;
-        font-size: 0.8em;
-    }
-
-/* Lists */
-    .flist-node.selected, .list-node.selected, .vector-node.selected {
-        background-color: lightcoral;
-        padding: 5px;
-        border: 1px solid black;
-        margin-bottom: 5px;
-    }
-    /* Double Linked */
-    .list-node {
-        background-color: #f2f2f2;
-        padding: 5px;
-        border: 1px solid black;
-        margin-bottom: 5px;
-    }
-
-    .list-node-address {
-        color: #666;
-        font-size: 0.8em;
-    }
-
-    /* Simple Linked */
-    .flist-node {
-        background-color: #f2f2f2;
-        padding: 5px;
-        border: 1px solid black;
-        margin-bottom: 5px;
-    }
-
-    .flist-node-address {
-        color: #666;
-        font-size: 0.8em;
-    }
-
-/* Stack */
-.stack-node {
-    background-color: #f2f2f2;
-    padding: 5px;
-    border: 1px solid black;
-    margin-bottom: 5px;
-}
-
-.stack-node-address {
+/* node-address */
+.vector-node-address, .list-node-address, .flist-node-address, .stack-node-address, .queue-node-address {
     color: #666;
     font-size: 0.8em;
 }
 
-/* Queue */
-.queue-node {
-    background-color: #f2f2f2;
+/* Nodes Selected */
+.flist-node.selected, .list-node.selected, .vector-node.selected {
+    background-color: lightcoral;
     padding: 5px;
     border: 1px solid black;
     margin-bottom: 5px;
-}
-
-.queue-node-address {
-    color: #666;
-    font-size: 0.8em;
 }
