@@ -49,20 +49,20 @@
         </div>
     </div>
     <script type="text/javascript">
-        let stack = [];
+        let stl_stack = [];
         
         const top_stack = () => {
             let myAddress = $("#stackTop");
-            (stack.length < 1) ? myAddress.text("nullptr") : myAddress.text(stack[stack.length - 1].address);
+            (stl_stack.length < 1) ? myAddress.text("nullptr") : myAddress.text(stl_stack[stl_stack.length - 1].address);
         }
         const updateStack = () => {
             let stackDiv = $("#stack");
             stackDiv.empty();
-            for (let i = stack.length - 1; i >= 0; i--) {
+            for (let i = stl_stack.length - 1; i >= 0; i--) {
                 let nodeDiv = $("<div>").addClass("stack-node").text(stack[i].value);
-                let addressDiv = $("<div>").addClass("stack-node-address").append(`<span class="badge text-bg-primary">Address: `+ stack[i].address +`</span>`);
-                if (i < stack.length - 1) {
-                    let nextAddressDiv = $("<div>").addClass("stack-node-address").append(`<span class="badge text-bg-info">Next: `+ stack[i + 1].address +`</span>`);
+                let addressDiv = $("<div>").addClass("stack-node-address").append(`<span class="badge text-bg-primary">Address: `+ stl_stack[i].address +`</span>`);
+                if (i < stl_stack.length - 1) {
+                    let nextAddressDiv = $("<div>").addClass("stack-node-address").append(`<span class="badge text-bg-info">Next: `+ stl_stack[i + 1].address +`</span>`);
                     nodeDiv.append(nextAddressDiv);
                 }
                 nodeDiv.append(addressDiv);
@@ -75,13 +75,13 @@
             let value = $("#pushValue").val();
             if (value != '') {
                 let address = random_address();
-                stack.push({ value: value, address: address });
+                stl_stack.push({ value: value, address: address });
                 updateStack();
                 $("#pushValue").val('');
             }
         });
         $('#btnPop').on('click', function () {
-            stack.pop();
+            stl_stack.pop();
             updateStack();
         });
     </script>

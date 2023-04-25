@@ -56,22 +56,22 @@
         </div>
     </div>
     <script type="text/javascript">
-    let list = [];
+    let stl_list = [];
     
     const head_tail_list = () => {
         let head_ = $("#listHead");
-        (list.length < 1) ? head_.text("nullptr"): head_.text(list[0].address);
+        (stl_list.length < 1) ? head_.text("nullptr"): head_.text(stl_list[0].address);
         let tail_ = $("#listTail");
-        (list.length < 1) ? tail_.text("nullptr"): tail_.text(list[list.length - 1].address);
+        (stl_list.length < 1) ? tail_.text("nullptr"): tail_.text(stl_list[stl_list.length - 1].address);
     }
     const updatelist = () => {
         let listDiv = $("#list");
         listDiv.empty();
-        for (let i = 0; i < list.length; i++) {
-            let nodeDiv = $("<div>").addClass("list-node").text(list[i].value);
-            let addressDiv = $("<div>").addClass("list-node-address").append(`<span class="badge text-bg-primary">Address: ` + list[i].address + `</span>`);
-            if (i < list.length - 1) {
-                let nextAddressDiv = $("<div>").addClass("list-node-address").append(`<span class="badge text-bg-info">Next: ` + list[i + 1].address + `</span>`);
+        for (let i = 0; i < stl_list.length; i++) {
+            let nodeDiv = $("<div>").addClass("list-node").text(stl_list[i].value);
+            let addressDiv = $("<div>").addClass("list-node-address").append(`<span class="badge text-bg-primary">Address: ` + stl_list[i].address + `</span>`);
+            if (i < stl_list.length - 1) {
+                let nextAddressDiv = $("<div>").addClass("list-node-address").append(`<span class="badge text-bg-info">Next: ` + stl_list[i + 1].address + `</span>`);
                 nodeDiv.append(nextAddressDiv);
             }
             nodeDiv.append(addressDiv);
@@ -87,13 +87,13 @@
             let nextAddress = "nullptr";
             let prevAddress = "nullptr";
 
-            if (list.length > 0) {
-                list[list.length-1].nextAddress = address;
-                list[list.length+1].prevAddress = address;
-                prevAddress = list[list.length-1].address;
+            if (stl_list.length > 0) {
+                stl_list[stl_list.length-1].nextAddress = address;
+                stl_list[stl_list.length+1].prevAddress = address;
+                prevAddress = stl_list[stl_list.length-1].address;
             }
 
-            list.push({value: value, address: address, prevAddress: prevAddress, nextAddress: nextAddress});
+            stl_list.push({value: value, address: address, prevAddress: prevAddress, nextAddress: nextAddress});
             updateList();
         }
     });
@@ -103,13 +103,13 @@
         let index = parseInt($("#listInsertPosition").val());
         if(value != '') {
             let address = random_address();
-            let nextAddress = index < list.length ? list[index].address : "null";
+            let nextAddress = index < stl_list.length ? stl_list[index].address : "nullptr";
             let prevAddress = "nullptr";
 
             if (index > 0)
-                list[index-1].nextAddress = address;
+                stl_list[index-1].nextAddress = address;
 
-            list.splice(index, 0, {value: value, address: address, prevAddress: prevAddress, nextAddress: nextAddress});
+            stl_list.splice(index, 0, {value: value, address: address, prevAddress: prevAddress, nextAddress: nextAddress});
             updateList();
         }
     });
@@ -118,10 +118,10 @@
         let index = $(".list-node.selected").index();
         if (index >= 0 && index < list.length) {
             if (index > 0) {
-                list[index-1].nextAddress = list[index].nextAddress;
-                list[index+1].prevAddress = list[index].prevAddress;
+                stl_list[index-1].nextAddress = stl_list[index].nextAddress;
+                stl_list[index+1].prevAddress = stl_list[index].prevAddress;
             }
-            list.splice(index, 1);
+            stl_list.splice(index, 1);
             updateList();
         }
     });
