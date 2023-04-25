@@ -100,8 +100,8 @@
         updateVector();
     });
 
-    const vectorData = (this) => {
-        $(`#vectorData`).text(`Dato: ` + this.val() + ``);
+    const vectorData = (node_) => {
+        $(`#vectorData`).text(`Dato: ` + node_.val() + ``);
     }
 
     const chooseNodeVector = (node_) => {
