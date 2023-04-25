@@ -71,7 +71,7 @@
         let tail_ = $("#flistTail");
         (stl_flist.length < 1) ? tail_.text("nullptr"): tail_.text(stl_flist[stl_flist.length - 1].address);
     }
-    const updateList = () => {
+    const updatefList = () => {
         let listDiv = $("#flist");
         listDiv.empty();
         for (let i = 0; i < stl_flist.length; i++) {
@@ -86,7 +86,7 @@
             }
             listDiv.append(nodeDiv);
         }
-        head_tail_list();
+        head_tail_flist();
     }
 
     $('#btnfListAdd').on('click', () => {

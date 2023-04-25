@@ -64,7 +64,7 @@
             let nodeDiv = $("<div>").addClass("queue-node").text(stl_queue[i].value);
             let addressDiv = $("<div>").addClass("queue-node-address").append(`<h6><span class="badge text-bg-primary">Address: ` + stl_queue[i].address + `</span></h6>`);
             if (i < stl_queue.length) {
-                let next_ stl_queue[i + 1]?.address == undefined ? "nullptr" : stl_queue[i + 1]?.address;
+                let next_ = stl_queue[i + 1]?.address == undefined ? "nullptr" : stl_queue[i + 1]?.address;
                 let nextAddressDiv = $("<div>").addClass("queue-node-address").append(`<h6><span class="badge text-bg-info">Next: ` + next_ + `</span></h6>`);
                 nodeDiv.append(nextAddressDiv);
             }
