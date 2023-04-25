@@ -14,7 +14,7 @@
     <div id="gui">
         <div class="container text-center">
             <div class="row">
-                <div class="col-6">
+                <div class="col-8">
                     <div class="input-group">
                         <span class="input-group-text">Ingrese un valor</span>
                         <input type="text" class="form-control" id="pushValue" aria-describedby="inputGroup-sizing-sm">
@@ -29,8 +29,8 @@
                         <button class="btn btn-outline-primary" id="btnClearStack" type="button">Clear</button>
                     </div>
                 </div>
-                <div class="col-6">
-                    <h4>Pila <span class="badge bg-secondary">Address Top: <span id="stackTop">nullptr</span></span></h4>
+                <div class="col-4">
+                    <h4>Pila <span class="badge bg-secondary">Top: <span id="stackTop">nullptr</span></span></h4>
                     <div id="stack"></div>
                 </div>
             </div>
@@ -43,7 +43,7 @@
             let myAddress = $("#stackTop");
             (stl_stack.length < 1) ? myAddress.text("nullptr") : myAddress.text(stl_stack[stl_stack.length - 1].address);
         }
-        
+
         const updateStack = () => {
             let stackDiv = $("#stack");
             stackDiv.empty();
