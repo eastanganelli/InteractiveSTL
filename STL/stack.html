@@ -25,6 +25,10 @@
                         <span class="input-group-text">"Pop" para remover el primer elemento</span>
                         <button class="btn btn-outline-primary" id="btnPop" type="button">Pop</button>
                     </div>
+                    <div class="input-group">
+                        <span class="input-group-text">Vaciar Pila</span>
+                        <button class="btn btn-outline-primary" id="btnClearStack" type="button">Clear</button>
+                    </div>
                 </div>
                 <div class="col">
                     <h3>Pila <span class="badge bg-secondary">Address Top: <span id="stackTop">nullptr</span></span></h3>
@@ -68,6 +72,12 @@
                 $("#pushValue").val('');
             }
         });
+        
+        $('#btnClearStack').on('click', () => {
+            stl_stack.slice(0, stl_stack.length - 1);
+            updateStack();
+        });
+
         $('#btnPop').on('click', () => {
             stl_stack.pop();
             updateStack();

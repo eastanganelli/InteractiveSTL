@@ -32,6 +32,10 @@
                         <span class="input-group-text">Haga click en "Remove" para remover elemento seleccionado</span>
                         <button class="btn btn-outline-primary" id="btnListRemove" type="button">Remove</button>
                     </div>
+                    <div class="input-group">
+                        <span class="input-group-text">Vaciar Lista</span>
+                        <button class="btn btn-outline-primary" id="btnClearList" type="button">Clear</button>
+                    </div>
                 </div>
                 <div class="col">
                     <h3>Lista <span class="badge bg-secondary">Address Head: <span id="listHead">nullptr</span></span> <span class="badge bg-secondary">Address Tail: <span id="listTail">nullptr</span></span></h3>
@@ -105,15 +109,14 @@
         }
     });
 
-    $('#btnListRemove').on('click', () => {
-        let index = $('.list-node.selected').index();
-        if (index >= 0 && index < stl_list.length) {
-            if (index > 0) {
-                stl_list[index - 1].nextAddress = stl_list[index].nextAddress;
-            }
-            stl_list.splice(index, 1);
-            updateList();
-        }
+    $('#btnClearStack').on('click', () => {
+        stl_stack.slice(0, stl_stack.length - 1);
+        updateStack();
+    });
+
+    $('#btnClearList').on('click', () => {
+        stl_list.splice(0, stl_list.length - 1);
+        updateList();
     });
 
     const chooseNodeF = (node_) => {

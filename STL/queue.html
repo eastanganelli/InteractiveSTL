@@ -25,6 +25,10 @@
                         <span class="input-group-text">"Dequeue" para remover el primer elemento</span>
                         <button class="btn btn-outline-primary" id="btnDequeue" type="button">Dequeue</button>
                     </div>
+                    <div class="input-group">
+                        <span class="input-group-text">Vaciar Cola</span>
+                        <button class="btn btn-outline-primary" id="btnClearQueue" type="button">Clear</button>
+                    </div>
                 </div>
                 <div class="col">
                     <h3>Cola <span class="badge bg-secondary">Address Head: <span id="queueHead">nullptr</span></span> <span class="badge bg-secondary">Address Tail: <span id="queueTail">nullptr</span></span></h3>
@@ -69,6 +73,11 @@
             updateQueue();
             $("#enqueueValue").val('');
         }
+    });
+
+    $('#btnClearQueue').on('click', () => {
+        stl_queue.slice(0, stl_queue.length - 1);
+        updateQueue();
     });
 
     $('#btnDequeue').on('click', function() {

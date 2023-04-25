@@ -32,6 +32,10 @@
                         <span class="input-group-text">Remover el elemento seleccionado</span>
                         <button class="btn btn-outline-primary" id="btnVectorRemove" type="button">Remove</button>
                     </div>
+                    <div class="input-group">
+                        <span class="input-group-text">Remover todos los elementos</span>
+                        <button class="btn btn-outline-primary" id="btnVectorErase" type="button">Remove</button>
+                    </div>
                 </div>
                 <div class="col">
                     <h3>Vector <span class="badge bg-secondary">Address Head: <span id="vectorHead">nullptr</span></span> <span class="badge bg-secondary">Address Tail: <span id="vectorTail">nullptr</span></span></h3>
@@ -88,6 +92,11 @@
             stl_vector.splice(index, 1);
             updateVector();
         }
+    });
+
+    $('#btnVectorRemove').on('click', () => {
+        stl_vector.slice(0, stl_vector.length - 1);
+        updateVector();
     });
 
     const chooseNodeVector = (node_) => {

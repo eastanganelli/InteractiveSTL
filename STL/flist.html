@@ -32,6 +32,10 @@
                         <span class="input-group-text">Haga click en "Remove" para remover elemento seleccionado</span>
                         <button class="btn btn-outline-primary" id="btnfListRemove" type="button">Remove</button>
                     </div>
+                    <div class="input-group">
+                        <span class="input-group-text">Vaciar Lista</span>
+                        <button class="btn btn-outline-primary" id="btnClearFList" type="button">Clear</button>
+                    </div>
                 </div>
                 <div class="col">
                     <h3>Lista <span class="badge bg-secondary">Address Head: <span id="flistHead">nullptr</span></span> <span class="badge bg-secondary">Address Tail: <span id="flistTail">nullptr</span></span></h3>
@@ -98,6 +102,11 @@
             $("#flistInsertPosition").val('');
             updatefList();
         }
+    });
+
+    $('#btnClearFList').on('click', () => {
+        stl_flist.slice(0, stl_flist.length - 1);
+        updatefList();
     });
 
     $('#btnfListRemove').on('click', () => {
