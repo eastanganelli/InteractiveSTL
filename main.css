@@ -8,6 +8,7 @@ div  {
 
 #gui {
     padding: 20px;
+    
 }
 
 /* STL */
@@ -24,7 +25,7 @@ div  {
     margin-bottom: 5px;
 }
 
-/* node-address */
+/* Node Address */
 .vector-node-address, .list-node-address, .flist-node-address, .stack-node-address, .queue-node-address {
     color: #666;
     font-size: 0.8em;
