@@ -9,3 +9,6 @@ div {
 #gui {
     padding: 20px;
 }
+tab-pane {
+    width: 100%;
+}

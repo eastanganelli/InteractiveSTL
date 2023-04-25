@@ -9,26 +9,14 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css" />
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.4/jquery.min.js"></script>
     <style>
-        body {
-            background-color: whitesmoke;
-        }
-
-        div {
-            padding: 10px;
-        }
-
-        #gui {
-            padding: 20px;
-        }
-        
-        .queue-node {
+        .list-node {
             background-color: #f2f2f2;
             padding: 5px;
             border: 1px solid black;
             margin-bottom: 5px;
         }
 
-        .queue-node-address {
+        .list-node-address {
             color: #666;
             font-size: 0.8em;
         }
@@ -44,64 +32,98 @@
             <div class="row">
                 <div class="col">
                     <div class="input-group">
-                        <span class="input-group-text">Ingrese un valor y luego click en "Enqueue"</span>
-                        <input type="text" class="form-control" id="enqueueValue" aria-describedby="inputGroup-sizing-sm">
-                        <button class="btn btn-outline-primary" id="btnEnqueue" type="button">Enqueue</button>
+                        <span class="input-group-text">Ingrese un valor</span>
+                        <input type="text" class="form-control" id="listValueAdd" aria-describedby="inputGroup-sizing-sm">
+                        <button class="btn btn-outline-primary" id="btnListAdd" type="button">Añadir</button>
                     </div>
                     <div class="input-group">
-                        <span class="input-group-text">Haga click en "Dequeue" para remover el primer elemento</span>
-                        <button class="btn btn-outline-primary" id="btnDequeue" type="button">Dequeue</button>
+                        <span class="input-group-text">Ingrese valor</span>
+                        <input type="text" class="form-control" id="listInsertValue" aria-describedby="inputGroup-sizing-sm">
+                        <span class="input-group-text">Ingrese posición</span>
+                        <input type="text" class="form-control" id="listInsertPosition" aria-describedby="inputGroup-sizing-sm">
+                        <button class="btn btn-outline-primary" id="btnListInsert" type="button">Insertar</button>
+                    </div>
+                    <div class="input-group">
+                        <span class="input-group-text">Haga click en "Remove" para remover elemento seleccionado</span>
+                        <button class="btn btn-outline-primary" id="btnListRemove" type="button">Remove</button>
                     </div>
                 </div>
                 <div class="col">
-                    <h3>Cola <span class="badge bg-secondary">Address Head: <span id="queueHead">nullptr</span></span> <span class="badge bg-secondary">Address Tail: <span id="queueTail">nullptr</span></span></h3>
-                    <div id="queue"></div>
+                    <h3>Lista <span class="badge bg-secondary">Address Head: <span id="listHead">nullptr</span></span> <span class="badge bg-secondary">Address Tail: <span id="listTail">nullptr</span></span></h3>
+                    <div id="list"></div>
                 </div>
             </div>
         </div>
     </div>
     <script type="text/javascript">
-    let queue = [];
-
-    const random_address = () => {
-        return "0x" + Math.floor(Math.random() * 100).toString(16).padStart(4, "0");
-    }
+    let list = [];
     
-    const head_tail_queue = () => {
-        let head_ = $("#queueHead");
-        (queue.length < 1) ? head_.text("nullptr"): head_.text(queue[0].address);
-        let tail_ = $("#queueTail");
-        (queue.length < 1) ? tail_.text("nullptr"): tail_.text(queue[queue.length - 1].address);
+    const head_tail_list = () => {
+        let head_ = $("#listHead");
+        (list.length < 1) ? head_.text("nullptr"): head_.text(list[0].address);
+        let tail_ = $("#listTail");
+        (list.length < 1) ? tail_.text("nullptr"): tail_.text(list[list.length - 1].address);
     }
-    const updateQueue = () => {
-        let queueDiv = $("#queue");
-        queueDiv.empty();
-        for (let i = 0; i < queue.length; i++) {
-            let nodeDiv = $("<div>").addClass("queue-node").text(queue[i].value);
-            let addressDiv = $("<div>").addClass("queue-node-address").append(`<span class="badge text-bg-primary">Address: ` + queue[i].address + `</span>`);
-            if (i < queue.length - 1) {
-                let nextAddressDiv = $("<div>").addClass("queue-node-address").append(`<span class="badge text-bg-info">Next: ` + queue[i + 1].address + `</span>`);
+    const updatelist = () => {
+        let listDiv = $("#list");
+        listDiv.empty();
+        for (let i = 0; i < list.length; i++) {
+            let nodeDiv = $("<div>").addClass("list-node").text(list[i].value);
+            let addressDiv = $("<div>").addClass("list-node-address").append(`<span class="badge text-bg-primary">Address: ` + list[i].address + `</span>`);
+            if (i < list.length - 1) {
+                let nextAddressDiv = $("<div>").addClass("list-node-address").append(`<span class="badge text-bg-info">Next: ` + list[i + 1].address + `</span>`);
                 nodeDiv.append(nextAddressDiv);
             }
             nodeDiv.append(addressDiv);
-            queueDiv.append(nodeDiv);
+            listDiv.append(nodeDiv);
         }
-        head_tail_queue();
+        head_tail_list();
     }
 
-    $('#btnEnqueue').on('click', function() {
-        let value = $("#enqueueValue").val();
-        if (value != '') {
+    $('#btnListAdd').on('click', function() {
+        let value = $("#listValueAdd").val();
+        if(value != '') {
             let address = random_address();
-            queue.push({ value: value, address: address });
-            updateQueue();
-            $("#enqueueValue").val('');
+            let nextAddress = "nullptr";
+            let prevAddress = "nullptr";
+
+            if (list.length > 0) {
+                list[list.length-1].nextAddress = address;
+                list[list.length+1].prevAddress = address;
+                prevAddress = list[list.length-1].address;
+            }
+
+            list.push({value: value, address: address, prevAddress: prevAddress, nextAddress: nextAddress});
+            updateList();
         }
     });
 
-    $('#btnDequeue').on('click', function() {
-        queue.shift();
-        updateQueue();
+    $('#btnListInsert').on('click', function() {
+        let value = $("#listInsertValue").val();
+        let index = parseInt($("#listInsertPosition").val());
+        if(value != '') {
+            let address = random_address();
+            let nextAddress = index < list.length ? list[index].address : "null";
+            let prevAddress = "nullptr";
+
+            if (index > 0)
+                list[index-1].nextAddress = address;
+
+            list.splice(index, 0, {value: value, address: address, prevAddress: prevAddress, nextAddress: nextAddress});
+            updateList();
+        }
+    });
+
+    $('#btnListRemove').on('click', function() {
+        let index = $(".list-node.selected").index();
+        if (index >= 0 && index < list.length) {
+            if (index > 0) {
+                list[index-1].nextAddress = list[index].nextAddress;
+                list[index+1].prevAddress = list[index].prevAddress;
+            }
+            list.splice(index, 1);
+            updateList();
+        }
     });
     </script>
 </body>

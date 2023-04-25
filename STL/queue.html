@@ -9,18 +9,6 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css" />
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.4/jquery.min.js"></script>
     <style>
-        body {
-            background-color: whitesmoke;
-        }
-
-        div {
-            padding: 10px;
-        }
-
-        #gui {
-            padding: 20px;
-        }
-        
         .queue-node {
             background-color: #f2f2f2;
             padding: 5px;
@@ -44,12 +32,12 @@
             <div class="row">
                 <div class="col">
                     <div class="input-group">
-                        <span class="input-group-text">Ingrese un valor y luego click en "Enqueue"</span>
+                        <span class="input-group-text">Ingrese un valor</span>
                         <input type="text" class="form-control" id="enqueueValue" aria-describedby="inputGroup-sizing-sm">
                         <button class="btn btn-outline-primary" id="btnEnqueue" type="button">Enqueue</button>
                     </div>
                     <div class="input-group">
-                        <span class="input-group-text">Haga click en "Dequeue" para remover el primer elemento</span>
+                        <span class="input-group-text">"Dequeue" para remover el primer elemento</span>
                         <button class="btn btn-outline-primary" id="btnDequeue" type="button">Dequeue</button>
                     </div>
                 </div>
@@ -63,10 +51,6 @@
     <script type="text/javascript">
     let queue = [];
 
-    const random_address = () => {
-        return "0x" + Math.floor(Math.random() * 100).toString(16).padStart(4, "0");
-    }
-    
     const head_tail_queue = () => {
         let head_ = $("#queueHead");
         (queue.length < 1) ? head_.text("nullptr"): head_.text(queue[0].address);
