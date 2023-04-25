@@ -60,9 +60,9 @@
             stackDiv.empty();
             for (let i = stl_stack.length - 1; i >= 0; i--) {
                 let nodeDiv = $("<div>").addClass("stack-node").text(stl_stack[i].value);
-                let addressDiv = $("<div>").addClass("stack-node-address").append(`<span class="badge text-bg-primary">Address: `+ stl_stack[i].address +`</span>`);
+                let addressDiv = $("<div>").addClass("stack-node-address").append(`<h6><span class="badge text-bg-primary">Address: `+ stl_stack[i].address +`</span></h6>`);
                 if (i < stl_stack.length - 1) {
-                    let nextAddressDiv = $("<div>").addClass("stack-node-address").append(`<span class="badge text-bg-info">Next: `+ stl_stack[i + 1].address +`</span>`);
+                    let nextAddressDiv = $("<div>").addClass("stack-node-address").append(`<h6><span class="badge text-bg-info">Next: `+ stl_stack[i + 1].address +`</span></h6>`);
                     nodeDiv.append(nextAddressDiv);
                 }
                 nodeDiv.append(addressDiv);
@@ -71,7 +71,7 @@
             top_stack();
         }
 
-        $('#btnPush').on('click', function () {
+        $('#btnPush').on('click', () => {
             let value = $("#pushValue").val();
             if (value != '') {
                 let address = random_address();
@@ -80,7 +80,7 @@
                 $("#pushValue").val('');
             }
         });
-        $('#btnPop').on('click', function () {
+        $('#btnPop').on('click', () => {
             stl_stack.pop();
             updateStack();
         });

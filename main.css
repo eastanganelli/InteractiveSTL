@@ -12,3 +12,7 @@ div {
 tab-pane {
     width: 100%;
 }
+
+.list-node, .queue-node, .stack-node, .vector-node {
+    font-size: 2em;
+}

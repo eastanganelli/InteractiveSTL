@@ -16,6 +16,13 @@
             margin-bottom: 5px;
         }
 
+        .list-node.selected {
+            background-color: lightcoral;
+            padding: 5px;
+            border: 1px solid black;
+            margin-bottom: 5px;
+        }
+
         .list-node-address {
             color: #666;
             font-size: 0.8em;
@@ -56,6 +63,9 @@
         </div>
     </div>
     <script type="text/javascript">
+    const random_address = () => {
+        return "0x" + Math.floor(Math.random() * 100).toString(16).padStart(4, "0");
+    }
     let stl_list = [];
     
     const head_tail_list = () => {
@@ -64,67 +74,76 @@
         let tail_ = $("#listTail");
         (stl_list.length < 1) ? tail_.text("nullptr"): tail_.text(stl_list[stl_list.length - 1].address);
     }
-    const updatelist = () => {
+    const updateList = () => {
         let listDiv = $("#list");
         listDiv.empty();
         for (let i = 0; i < stl_list.length; i++) {
-            let nodeDiv = $("<div>").addClass("list-node").text(stl_list[i].value);
-            let addressDiv = $("<div>").addClass("list-node-address").append(`<span class="badge text-bg-primary">Address: ` + stl_list[i].address + `</span>`);
-            if (i < stl_list.length - 1) {
-                let nextAddressDiv = $("<div>").addClass("list-node-address").append(`<span class="badge text-bg-info">Next: ` + stl_list[i + 1].address + `</span>`);
+            let nodeDiv = $("<div>").addClass("list-node").attr('onclick', 'chooseNode(this)').text(stl_list[i].value);
+            let addressDiv = $("<div>").addClass("list-node-address").append(`<h6><span class="badge text-bg-primary">Address: ` + stl_list[i].address + `</span></h6>`);
+            nodeDiv.append(addressDiv);
+            if (i < stl_list.length) {
+                let next_ = (stl_list[i + 1]?.address == undefined) ? "nullptr" : stl_list[i + 1].address,
+                    prev_ =  (stl_list[i - 1]?.address == undefined) ? "nullptr" : stl_list[i - 1].address;
+                let nextAddressDiv = $("<div>").addClass("list-node-address").prepend(`<h6><span class="badge text-bg-info">Previous: ` + prev_ + `</span></h6>`).append(`<h6><span class="badge text-bg-info">Next: ` + next_ + `</span></h6>`);
+
                 nodeDiv.append(nextAddressDiv);
             }
-            nodeDiv.append(addressDiv);
             listDiv.append(nodeDiv);
         }
         head_tail_list();
     }
 
-    $('#btnListAdd').on('click', function() {
+    $('#btnListAdd').on('click', () => {
         let value = $("#listValueAdd").val();
         if(value != '') {
             let address = random_address();
-            let nextAddress = "nullptr";
-            let prevAddress = "nullptr";
+            let nextAddress = "nullptr",
+                prevAddress = "nullptr";
 
             if (stl_list.length > 0) {
-                stl_list[stl_list.length-1].nextAddress = address;
-                stl_list[stl_list.length+1].prevAddress = address;
-                prevAddress = stl_list[stl_list.length-1].address;
+                stl_list[stl_list.length-1].prevAddress = address;
             }
 
             stl_list.push({value: value, address: address, prevAddress: prevAddress, nextAddress: nextAddress});
+            $("#listValueAdd").val('');
             updateList();
         }
     });
 
-    $('#btnListInsert').on('click', function() {
+    $('#btnListInsert').on('click', () => {
         let value = $("#listInsertValue").val();
         let index = parseInt($("#listInsertPosition").val());
         if(value != '') {
             let address = random_address();
-            let nextAddress = index < stl_list.length ? stl_list[index].address : "nullptr";
-            let prevAddress = "nullptr";
+            let nextAddress = index < stl_list.length ? stl_list[index].address : "nullptr",
+                prevAddress = index < stl_list.length ? stl_list[index - 1].address : "nullptr";
 
-            if (index > 0)
-                stl_list[index-1].nextAddress = address;
+            if (index > 0) {
+                stl_list[index - 1].prevAddress = address;
+                stl_list[index + 1].nextAddress = address;
+            }
 
             stl_list.splice(index, 0, {value: value, address: address, prevAddress: prevAddress, nextAddress: nextAddress});
+            $("#listInsertValue").val('');
+            $("#listInsertPosition").val('');
             updateList();
         }
     });
 
-    $('#btnListRemove').on('click', function() {
-        let index = $(".list-node.selected").index();
-        if (index >= 0 && index < list.length) {
+    $('#btnListRemove').on('click', () => {
+        let index = $('.list-node.selected').index();
+        if (index >= 0 && index < stl_list.length) {
             if (index > 0) {
-                stl_list[index-1].nextAddress = stl_list[index].nextAddress;
-                stl_list[index+1].prevAddress = stl_list[index].prevAddress;
+                stl_list[index - 1].nextAddress = stl_list[index].nextAddress;
             }
             stl_list.splice(index, 1);
             updateList();
         }
     });
+
+    const chooseNode = (node_) => {
+        $(node_).addClass('selected');
+    }
     </script>
 </body>
 

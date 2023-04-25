@@ -15,6 +15,14 @@
             border: 1px solid black;
             margin-bottom: 5px;
         }
+
+        .list-node.selected {
+            background-color: lightcoral;
+            padding: 5px;
+            border: 1px solid black;
+            margin-bottom: 5px;
+        }
+
         .list-node-address {
             color: #666;
             font-size: 0.8em;
@@ -31,61 +39,103 @@
             <div class="row">
                 <div class="col">
                     <div class="input-group">
-                        <span class="input-group-text">Ingrese un valor y luego click en "EnfList"</span>
-                        <input type="text" class="form-control" id="enfListValue" aria-describedby="inputGroup-sizing-sm">
-                        <button class="btn btn-outline-primary" id="btnEnfList" type="button">EnfList</button>
+                        <span class="input-group-text">Ingrese un valor</span>
+                        <input type="text" class="form-control" id="listValueAdd" aria-describedby="inputGroup-sizing-sm">
+                        <button class="btn btn-outline-primary" id="btnListAdd" type="button">Añadir</button>
                     </div>
                     <div class="input-group">
-                        <span class="input-group-text">Haga click en "DefList" para remover el primer elemento</span>
-                        <button class="btn btn-outline-primary" id="btnDefList" type="button">DefList</button>
+                        <span class="input-group-text">Ingrese valor</span>
+                        <input type="text" class="form-control" id="listInsertValue" aria-describedby="inputGroup-sizing-sm">
+                        <span class="input-group-text">Ingrese posición</span>
+                        <input type="text" class="form-control" id="listInsertPosition" aria-describedby="inputGroup-sizing-sm">
+                        <button class="btn btn-outline-primary" id="btnListInsert" type="button">Insertar</button>
+                    </div>
+                    <div class="input-group">
+                        <span class="input-group-text">Haga click en "Remove" para remover elemento seleccionado</span>
+                        <button class="btn btn-outline-primary" id="btnListRemove" type="button">Remove</button>
                     </div>
                 </div>
                 <div class="col">
-                    <h3>Cola <span class="badge bg-secondary">Address Head: <span id="fListHead">nullptr</span></span> <span class="badge bg-secondary">Address Tail: <span id="fListTail">nullptr</span></span></h3>
-                    <div id="fList"></div>
+                    <h3>Lista <span class="badge bg-secondary">Address Head: <span id="listHead">nullptr</span></span> <span class="badge bg-secondary">Address Tail: <span id="listTail">nullptr</span></span></h3>
+                    <div id="list"></div>
                 </div>
             </div>
         </div>
     </div>
     <script type="text/javascript">
-    let fList = [];
+    let stl_flist = [];
     
-    const head_tail_fList = () => {
-        let head_ = $("#fListHead");
-        (fList.length < 1) ? head_.text("nullptr"): head_.text(fList[0].address);
-        let tail_ = $("#fListTail");
-        (fList.length < 1) ? tail_.text("nullptr"): tail_.text(fList[fList.length - 1].address);
+    const head_tail_list = () => {
+        let head_ = $("#listHead");
+        (stl_flist.length < 1) ? head_.text("nullptr"): head_.text(stl_flist[0].address);
+        let tail_ = $("#listTail");
+        (stl_flist.length < 1) ? tail_.text("nullptr"): tail_.text(stl_flist[stl_flist.length - 1].address);
     }
-    const updatefList = () => {
-        let fListDiv = $("#fList");
-        fListDiv.empty();
-        for (let i = 0; i < fList.length; i++) {
-            let nodeDiv = $("<div>").addClass("fList-node").text(fList[i].value);
-            let addressDiv = $("<div>").addClass("fList-node-address").append(`<span class="badge text-bg-primary">Address: ` + fList[i].address + `</span>`);
-            if (i < fList.length - 1) {
-                let nextAddressDiv = $("<div>").addClass("fList-node-address").append(`<span class="badge text-bg-info">Next: ` + fList[i + 1].address + `</span>`);
+    const updateList = () => {
+        let listDiv = $("#list");
+        listDiv.empty();
+        for (let i = 0; i < stl_flist.length; i++) {
+            let nodeDiv = $("<div>").addClass("list-node").attr('onclick', 'chooseNode(this)').text(stl_flist[i].value);
+            let addressDiv = $("<div>").addClass("list-node-address").append(`<h6><span class="badge text-bg-primary">Address: ` + stl_flist[i].address + `</span></h6>`);
+            nodeDiv.append(addressDiv);
+            if (i < stl_flist.length) {
+                let next_ = (stl_flist[i + 1]?.address == undefined) ? "nullptr" : stl_flist[i + 1].address;
+                let nextAddressDiv = $("<div>").addClass("list-node-address").append(`<h6><span class="badge text-bg-info">Next: ` + next_ + `</span></h6>`);
+
                 nodeDiv.append(nextAddressDiv);
             }
-            nodeDiv.append(addressDiv);
-            fListDiv.append(nodeDiv);
+            listDiv.append(nodeDiv);
         }
-        head_tail_fList();
+        head_tail_list();
     }
 
-    $('#btnEnfList').on('click', function() {
-        let value = $("#enfListValue").val();
-        if (value != '') {
+    $('#btnListAdd').on('click', () => {
+        let value = $("#listValueAdd").val();
+        if(value != '') {
             let address = random_address();
-            fList.push({ value: value, address: address });
-            updatefList();
-            $("#enfListValue").val('');
+            let nextAddress = "nullptr";
+
+            if (stl_flist.length > 0) {
+                stl_flist[stl_flist.length-1].prevAddress = address;
+            }
+
+            stl_flist.push({value: value, address: address, nextAddress: nextAddress});
+            $("#listValueAdd").val('');
+            updateList();
         }
     });
 
-    $('#btnDefList').on('click', function() {
-        fList.shift();
-        updatefList();
+    $('#btnListInsert').on('click', () => {
+        let value = $("#listInsertValue").val();
+        let index = parseInt($("#listInsertPosition").val());
+        if(value != '') {
+            let address = random_address();
+            let nextAddress = index < stl_flist.length ? stl_flist[index].address : "nullptr";
+
+            if (index > 0)
+                stl_flist[index-1].nextAddress = address;
+
+            stl_flist.splice(index, 0, {value: value, address: address, nextAddress: nextAddress});
+            $("#listInsertValue").val('');
+            $("#listInsertPosition").val('');
+            updateList();
+        }
     });
+
+    $('#btnListRemove').on('click', () => {
+        let index = $('.list-node.selected').index();
+        if (index >= 0 && index < stl_flist.length) {
+            if (index > 0) {
+                stl_flist[index - 1].nextAddress = stl_flist[index].nextAddress;
+            }
+            stl_flist.splice(index, 1);
+            updateList();
+        }
+    });
+
+    const chooseNode = (node_) => {
+        $(node_).addClass('selected');
+    }
     </script>
 </body>
 
