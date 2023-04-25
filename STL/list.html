@@ -75,7 +75,7 @@
         let listDiv = $("#list");
         listDiv.empty();
         for (let i = 0; i < stl_list.length; i++) {
-            let nodeDiv = $("<div>").addClass("list-node").attr('onclick', 'chooseNode(this)').text(stl_list[i].value);
+            let nodeDiv = $("<div>").addClass("list-node").attr('onclick', 'chooseNodeF(this)').text(stl_list[i].value);
             let addressDiv = $("<div>").addClass("list-node-address").append(`<h6><span class="badge text-bg-primary">Address: ` + stl_list[i].address + `</span></h6>`);
             nodeDiv.append(addressDiv);
             if (i < stl_list.length) {
@@ -138,7 +138,7 @@
         }
     });
 
-    const chooseNode = (node_) => {
+    const chooseNodeF = (node_) => {
         let thisNode = $(node_);
         if (thisNode.hasClass('selected'))
             $(node_).removeClass('selected');

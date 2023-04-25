@@ -32,39 +32,44 @@
             <div class="row">
                 <div class="col">
                     <div class="input-group">
-                        <span class="input-group-text">Ingrese un valor y luego click en "Envector"</span>
-                        <input type="text" class="form-control" id="envectorValue" aria-describedby="inputGroup-sizing-sm">
-                        <button class="btn btn-outline-primary" id="btnEnvector" type="button">Envector</button>
+                        <span class="input-group-text">Ingrese un valor</span>
+                        <input type="text" class="form-control" id="vectorValue" aria-describedby="inputGroup-sizing-sm">
+                        <button class="btn btn-outline-primary" id="btnAddVector" type="button">Add</button>
                     </div>
                     <div class="input-group">
-                        <span class="input-group-text">Haga click en "Devector" para remover el primer elemento</span>
-                        <button class="btn btn-outline-primary" id="btnDevector" type="button">Devector</button>
+                        <span class="input-group-text">Remover el elemento seleccionado</span>
+                        <button class="btn btn-outline-primary" id="btnRemoveVector" type="button">Remove</button>
                     </div>
                 </div>
                 <div class="col">
-                    <h3>Cola <span class="badge bg-secondary">Address Head: <span id="vectorHead">nullptr</span></span> <span class="badge bg-secondary">Address Tail: <span id="vectorTail">nullptr</span></span></h3>
+                    <h3>Vector <span class="badge bg-secondary">Address Head: <span id="vectorHead">nullptr</span></span> <span class="badge bg-secondary">Address Tail: <span id="vectorTail">nullptr</span></span></h3>
                     <div id="vector"></div>
                 </div>
             </div>
         </div>
     </div>
     <script type="text/javascript">
-    let vector = [];
-    
+        const follow_address = (length) => {
+        let address = length > 0 ? "0x" + length.toString(16).padStart(4, "0") : "nullptr";
+        return address;
+    }
+    let stl_vector = [];
+
     const head_tail_vector = () => {
         let head_ = $("#vectorHead");
-        (vector.length < 1) ? head_.text("nullptr"): head_.text(vector[0].address);
+        (stl_vector.length < 1) ? head_.text("nullptr"): head_.text(stl_vector[0].address);
         let tail_ = $("#vectorTail");
-        (vector.length < 1) ? tail_.text("nullptr"): tail_.text(vector[vector.length - 1].address);
+        (stl_vector.length < 1) ? tail_.text("nullptr"): tail_.text(stl_vector[stl_vector.length - 1].address);
     }
-    const updatevector = () => {
+    const updateVector = () => {
         let vectorDiv = $("#vector");
         vectorDiv.empty();
-        for (let i = 0; i < vector.length; i++) {
-            let nodeDiv = $("<div>").addClass("vector-node").text(vector[i].value);
-            let addressDiv = $("<div>").addClass("vector-node-address").append(`<span class="badge text-bg-primary">Address: ` + vector[i].address + `</span>`);
-            if (i < vector.length - 1) {
-                let nextAddressDiv = $("<div>").addClass("vector-node-address").append(`<span class="badge text-bg-info">Next: ` + vector[i + 1].address + `</span>`);
+        for (let i = 0; i < stl_vector.length; i++) {
+            let nodeDiv = $("<div>").addClass("vector-node").text(stl_vector[i].value);
+            let addressDiv = $("<div>").addClass("vector-node-address").append(`<h6><span class="badge text-bg-primary">Address: ` + stl_vector[i].address + `</span></h6>`);
+            if (i < stl_vector.length) {
+                let next_ = stl_vector[i + 1]?.address == undefined ? "nullptr" : stl_vector[i + 1]?.address;
+                let nextAddressDiv = $("<div>").addClass("vector-node-address").append(`<h6><span class="badge text-bg-info">Next: ` + next_ + `</span></h6>`);
                 nodeDiv.append(nextAddressDiv);
             }
             nodeDiv.append(addressDiv);
@@ -73,19 +78,19 @@
         head_tail_vector();
     }
 
-    $('#btnEnvector').on('click', function() {
-        let value = $("#envectorValue").val();
+    $('#btnAddVector').on('click', function() {
+        let value = $("#vectorValue").val();
         if (value != '') {
             let address = random_address();
-            vector.push({ value: value, address: address });
-            updatevector();
+            stl_vector.push({ value: value, address: address });
+            updateVector();
             $("#envectorValue").val('');
         }
     });
 
-    $('#btnDevector').on('click', function() {
-        vector.shift();
-        updatevector();
+    $('#btnRemoveVector').on('click', function() {
+        stl_vector.shift();
+        updateVector();
     });
     </script>
 </body>
