@@ -20,9 +20,8 @@ div  {
     background-color: #f2f2f2;
     padding: 5px;
     border: 1px solid black;
-    border-radius: 12.5%;
+    border-radius: 25px;
     margin-bottom: 5px;
-    font-size: 2em;
 }
 
 /* node-address */
@@ -36,6 +35,6 @@ div  {
     background-color: lightcoral;
     padding: 5px;
     border: 1px solid black;
-    border-radius: 12.5%;
+    border-radius: 25px;
     margin-bottom: 5px;
 }
