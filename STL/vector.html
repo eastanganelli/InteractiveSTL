@@ -33,6 +33,9 @@
                         <span class="input-group-text">Remover todos los elementos</span>
                         <button class="btn btn-outline-primary" id="btnVectorClear" type="button">Clear</button>
                     </div>
+                    <div class="input-group">
+                        <span class="input-group-text">Elemento Seleccionado: <span id="vectorData"></span></span>
+                    </div>
                 </div>
                 <div class="col-4">
                     <H5>Vector <span class="badge bgd-secondary">Head: <span id="vectorHead">nullptr</span></span><span class="badge bg-secondary">Tail: <span id="vectorTail">nullptr</span></span></H5>
@@ -97,12 +100,18 @@
         updateVector();
     });
 
+    const vectorData = (this) => {
+        $(`#vectorData`).text(`Dato: ` + this.val() + ``);
+    }
+
     const chooseNodeVector = (node_) => {
         let thisNode = $(node_);
         if (thisNode.hasClass('selected'))
             $(node_).removeClass('selected');
-        else 
+        else { 
             $(node_).addClass('selected');
+            vectorData(thisNode);
+        }
     }
     </script>
 </body>
