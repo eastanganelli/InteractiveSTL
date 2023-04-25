@@ -43,6 +43,7 @@
         let tail_ = $("#queueTail");
         (stl_queue.length < 1) ? tail_.text("nullptr"): tail_.text(stl_queue[stl_queue.length - 1].address);
     }
+    
     const updateQueue = () => {
         let queueDiv = $("#queue");
         queueDiv.empty();
