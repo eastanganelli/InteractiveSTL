@@ -101,7 +101,7 @@
 
             stl_flist.push({value: value, address: address, nextAddress: nextAddress});
             $("#flistValueAdd").val('');
-            updateList();
+            updatefList();
         }
     });
 
@@ -118,7 +118,7 @@
             stl_flist.splice(index, 0, {value: value, address: address, nextAddress: nextAddress});
             $("#flistInsertValue").val('');
             $("#flistInsertPosition").val('');
-            updateList();
+            updatefList();
         }
     });
 
@@ -129,7 +129,7 @@
                 stl_flist[index - 1].nextAddress = stl_flist[index].nextAddress;
             }
             stl_flist.splice(index, 1);
-            updateList();
+            updatefList();
         }
     });
 
