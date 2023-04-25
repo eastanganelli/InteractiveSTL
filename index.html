@@ -57,7 +57,7 @@
 	}
 
 	const follow_address = (length) => {
-	    let address = length > 0 ? "0x" + length.toString(16).padStart(4, "0") : "nullptr";
+	    let address = length >= 0 ? "0x" + length.toString(16).padStart(4, "0") : "nullptr";
 	    return address;
 	}
     </script>
