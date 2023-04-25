@@ -31,60 +31,60 @@
             <div class="row">
                 <div class="col">
                     <div class="input-group">
-                        <span class="input-group-text">Ingrese un valor y luego click en "Enqueue"</span>
-                        <input type="text" class="form-control" id="enqueueValue" aria-describedby="inputGroup-sizing-sm">
-                        <button class="btn btn-outline-primary" id="btnEnqueue" type="button">Enqueue</button>
+                        <span class="input-group-text">Ingrese un valor y luego click en "EnfList"</span>
+                        <input type="text" class="form-control" id="enfListValue" aria-describedby="inputGroup-sizing-sm">
+                        <button class="btn btn-outline-primary" id="btnEnfList" type="button">EnfList</button>
                     </div>
                     <div class="input-group">
-                        <span class="input-group-text">Haga click en "Dequeue" para remover el primer elemento</span>
-                        <button class="btn btn-outline-primary" id="btnDequeue" type="button">Dequeue</button>
+                        <span class="input-group-text">Haga click en "DefList" para remover el primer elemento</span>
+                        <button class="btn btn-outline-primary" id="btnDefList" type="button">DefList</button>
                     </div>
                 </div>
                 <div class="col">
-                    <h3>Cola <span class="badge bg-secondary">Address Head: <span id="queueHead">nullptr</span></span> <span class="badge bg-secondary">Address Tail: <span id="queueTail">nullptr</span></span></h3>
-                    <div id="queue"></div>
+                    <h3>Cola <span class="badge bg-secondary">Address Head: <span id="fListHead">nullptr</span></span> <span class="badge bg-secondary">Address Tail: <span id="fListTail">nullptr</span></span></h3>
+                    <div id="fList"></div>
                 </div>
             </div>
         </div>
     </div>
     <script type="text/javascript">
-    let queue = [];
+    let fList = [];
     
-    const head_tail_queue = () => {
-        let head_ = $("#queueHead");
-        (queue.length < 1) ? head_.text("nullptr"): head_.text(queue[0].address);
-        let tail_ = $("#queueTail");
-        (queue.length < 1) ? tail_.text("nullptr"): tail_.text(queue[queue.length - 1].address);
+    const head_tail_fList = () => {
+        let head_ = $("#fListHead");
+        (fList.length < 1) ? head_.text("nullptr"): head_.text(fList[0].address);
+        let tail_ = $("#fListTail");
+        (fList.length < 1) ? tail_.text("nullptr"): tail_.text(fList[fList.length - 1].address);
     }
-    const updateQueue = () => {
-        let queueDiv = $("#queue");
-        queueDiv.empty();
-        for (let i = 0; i < queue.length; i++) {
-            let nodeDiv = $("<div>").addClass("queue-node").text(queue[i].value);
-            let addressDiv = $("<div>").addClass("queue-node-address").append(`<span class="badge text-bg-primary">Address: ` + queue[i].address + `</span>`);
-            if (i < queue.length - 1) {
-                let nextAddressDiv = $("<div>").addClass("queue-node-address").append(`<span class="badge text-bg-info">Next: ` + queue[i + 1].address + `</span>`);
+    const updatefList = () => {
+        let fListDiv = $("#fList");
+        fListDiv.empty();
+        for (let i = 0; i < fList.length; i++) {
+            let nodeDiv = $("<div>").addClass("fList-node").text(fList[i].value);
+            let addressDiv = $("<div>").addClass("fList-node-address").append(`<span class="badge text-bg-primary">Address: ` + fList[i].address + `</span>`);
+            if (i < fList.length - 1) {
+                let nextAddressDiv = $("<div>").addClass("fList-node-address").append(`<span class="badge text-bg-info">Next: ` + fList[i + 1].address + `</span>`);
                 nodeDiv.append(nextAddressDiv);
             }
             nodeDiv.append(addressDiv);
-            queueDiv.append(nodeDiv);
+            fListDiv.append(nodeDiv);
         }
-        head_tail_queue();
+        head_tail_fList();
     }
 
-    $('#btnEnqueue').on('click', function() {
-        let value = $("#enqueueValue").val();
+    $('#btnEnfList').on('click', function() {
+        let value = $("#enfListValue").val();
         if (value != '') {
             let address = random_address();
-            queue.push({ value: value, address: address });
-            updateQueue();
-            $("#enqueueValue").val('');
+            fList.push({ value: value, address: address });
+            updatefList();
+            $("#enfListValue").val('');
         }
     });
 
-    $('#btnDequeue').on('click', function() {
-        queue.shift();
-        updateQueue();
+    $('#btnDefList').on('click', function() {
+        fList.shift();
+        updatefList();
     });
     </script>
 </body>

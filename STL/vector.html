@@ -9,14 +9,14 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css" />
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.4/jquery.min.js"></script>
     <style>
-        .queue-node {
+        .vector-node {
             background-color: #f2f2f2;
             padding: 5px;
             border: 1px solid black;
             margin-bottom: 5px;
         }
 
-        .queue-node-address {
+        .vector-node-address {
             color: #666;
             font-size: 0.8em;
         }
@@ -32,64 +32,64 @@
             <div class="row">
                 <div class="col">
                     <div class="input-group">
-                        <span class="input-group-text">Ingrese un valor y luego click en "Enqueue"</span>
-                        <input type="text" class="form-control" id="enqueueValue" aria-describedby="inputGroup-sizing-sm">
-                        <button class="btn btn-outline-primary" id="btnEnqueue" type="button">Enqueue</button>
+                        <span class="input-group-text">Ingrese un valor y luego click en "Envector"</span>
+                        <input type="text" class="form-control" id="envectorValue" aria-describedby="inputGroup-sizing-sm">
+                        <button class="btn btn-outline-primary" id="btnEnvector" type="button">Envector</button>
                     </div>
                     <div class="input-group">
-                        <span class="input-group-text">Haga click en "Dequeue" para remover el primer elemento</span>
-                        <button class="btn btn-outline-primary" id="btnDequeue" type="button">Dequeue</button>
+                        <span class="input-group-text">Haga click en "Devector" para remover el primer elemento</span>
+                        <button class="btn btn-outline-primary" id="btnDevector" type="button">Devector</button>
                     </div>
                 </div>
                 <div class="col">
-                    <h3>Cola <span class="badge bg-secondary">Address Head: <span id="queueHead">nullptr</span></span> <span class="badge bg-secondary">Address Tail: <span id="queueTail">nullptr</span></span></h3>
-                    <div id="queue"></div>
+                    <h3>Cola <span class="badge bg-secondary">Address Head: <span id="vectorHead">nullptr</span></span> <span class="badge bg-secondary">Address Tail: <span id="vectorTail">nullptr</span></span></h3>
+                    <div id="vector"></div>
                 </div>
             </div>
         </div>
     </div>
     <script type="text/javascript">
-    let queue = [];
+    let vector = [];
 
     const random_address = () => {
         return "0x" + Math.floor(Math.random() * 100).toString(16).padStart(4, "0");
     }
     
-    const head_tail_queue = () => {
-        let head_ = $("#queueHead");
-        (queue.length < 1) ? head_.text("nullptr"): head_.text(queue[0].address);
-        let tail_ = $("#queueTail");
-        (queue.length < 1) ? tail_.text("nullptr"): tail_.text(queue[queue.length - 1].address);
+    const head_tail_vector = () => {
+        let head_ = $("#vectorHead");
+        (vector.length < 1) ? head_.text("nullptr"): head_.text(vector[0].address);
+        let tail_ = $("#vectorTail");
+        (vector.length < 1) ? tail_.text("nullptr"): tail_.text(vector[vector.length - 1].address);
     }
-    const updateQueue = () => {
-        let queueDiv = $("#queue");
-        queueDiv.empty();
-        for (let i = 0; i < queue.length; i++) {
-            let nodeDiv = $("<div>").addClass("queue-node").text(queue[i].value);
-            let addressDiv = $("<div>").addClass("queue-node-address").append(`<span class="badge text-bg-primary">Address: ` + queue[i].address + `</span>`);
-            if (i < queue.length - 1) {
-                let nextAddressDiv = $("<div>").addClass("queue-node-address").append(`<span class="badge text-bg-info">Next: ` + queue[i + 1].address + `</span>`);
+    const updatevector = () => {
+        let vectorDiv = $("#vector");
+        vectorDiv.empty();
+        for (let i = 0; i < vector.length; i++) {
+            let nodeDiv = $("<div>").addClass("vector-node").text(vector[i].value);
+            let addressDiv = $("<div>").addClass("vector-node-address").append(`<span class="badge text-bg-primary">Address: ` + vector[i].address + `</span>`);
+            if (i < vector.length - 1) {
+                let nextAddressDiv = $("<div>").addClass("vector-node-address").append(`<span class="badge text-bg-info">Next: ` + vector[i + 1].address + `</span>`);
                 nodeDiv.append(nextAddressDiv);
             }
             nodeDiv.append(addressDiv);
-            queueDiv.append(nodeDiv);
+            vectorDiv.append(nodeDiv);
         }
-        head_tail_queue();
+        head_tail_vector();
     }
 
-    $('#btnEnqueue').on('click', function() {
-        let value = $("#enqueueValue").val();
+    $('#btnEnvector').on('click', function() {
+        let value = $("#envectorValue").val();
         if (value != '') {
             let address = random_address();
-            queue.push({ value: value, address: address });
-            updateQueue();
-            $("#enqueueValue").val('');
+            vector.push({ value: value, address: address });
+            updatevector();
+            $("#envectorValue").val('');
         }
     });
 
-    $('#btnDequeue').on('click', function() {
-        queue.shift();
-        updateQueue();
+    $('#btnDevector').on('click', function() {
+        vector.shift();
+        updatevector();
     });
     </script>
 </body>
